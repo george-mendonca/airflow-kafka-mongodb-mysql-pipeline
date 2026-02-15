@@ -1,26 +1,40 @@
-# Documentação do Projeto
+# Documentation Index
 
-## Introdução
-Este projeto integra Apache Airflow, Kafka, MongoDB e MySQL para um fluxo de dados robusto e eficiente.
+## User Profiles
 
-## Contribuindo
-Para contribuir com este projeto, por favor, consulte o documento [CONTRIBUINDO.md](CONTRIBUINDO.md) para diretrizes e melhores práticas.
+### Beginner
+- Quick Start Guide
+- Installation Instructions
+- Basic Usage
 
-## Segurança
-Os requisitos de segurança estão detalhados em [SEGURANCA.md](SEGURANCA.md). Siga essas orientações para garantir a segurança do sistema.
+### Intermediate
+- Configuration Options
+- Common Issues and Troubleshooting
+- Integration with Other Tools
 
-## Perguntas Frequentes
-Consulte [FAQ.md](FAQ.md) para respostas a perguntas comuns sobre a utilização e manutenção do projeto.
+### Advanced
+- Performance Optimization
+- Customization and Extensibility
+- Advanced Features and Best Practices
 
-## Índice da Documentação
-### Por Tópico
-- [Introdução](README.md)
-- [Como Contribuir](CONTRIBUINDO.md)
-- [Requisitos de Segurança](SEGURANCA.md)
-- [FAQ](FAQ.md)
+## Guides
 
-### Por Perfil de Público
-- **Desenvolvedores**: [CONTRIBUINDO.md](CONTRIBUINDO.md)
-- **DevOps**: [SEGURANCA.md](SEGURANCA.md)
-- **Contribuidores**: [FAQ.md](FAQ.md)
-- **Arquitetos**: [Documentação Geral](README.md)
+### Getting Started
+1. **Installation**: Instructions for setting up the environment.
+2. **Running the Pipeline**: Steps to execute the pipeline for the first time.
+
+### Configuration
+- Explanation of configuration files and parameters.
+
+### Troubleshooting
+- Tips for identifying and solving common problems.
+
+### Contributions
+- Guidelines for contributing to the project and how to submit issues.
+
+### Frequently Asked Questions (FAQ)
+- Answering common questions about the project.
+
+---
+
+This README serves as a centralized resource for accessing relevant documents and guides specific to user profiles.
