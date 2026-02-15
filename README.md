@@ -329,33 +329,30 @@ The project includes unit tests for all major components.
 
 ```bash
 # From project root
-python -m pytest tests/
+python -m unittest discover -s tests -p "test_*.py"
 
 # With verbose output
-python -m pytest tests/ -v
-
-# With coverage report
-python -m pytest tests/ --cov=src --cov-report=html
+python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
 ### Run Specific Test Files
 
 ```bash
 # MongoDB client tests
-python -m pytest tests/test_mongodb_client.py
+python -m unittest tests.test_mongodb_client
 
 # MySQL client tests
-python -m pytest tests/test_mysql_client.py
+python -m unittest tests.test_mysql_client
 
 # ETL service tests
-python -m pytest tests/test_etl_service.py
+python -m unittest tests.test_etl_service
 ```
 
 ### Run Individual Tests
 
 ```bash
 # Run a specific test
-python -m pytest tests/test_mongodb_client.py::TestMongoDBClient::test_insert_document
+python -m unittest tests.test_mongodb_client.TestMongoDBClient.test_insert_document
 ```
 
 ## 🔐 Security Best Practices
@@ -444,7 +441,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Install development dependencies
-pip install pytest pytest-cov black flake8
+pip install black flake8
 ```
 
 ### Code Quality
@@ -465,7 +462,7 @@ mypy src/
 1. Create feature branch: `git checkout -b feature/my-feature`
 2. Write tests first (TDD approach)
 3. Implement feature
-4. Run tests: `pytest tests/`
+4. Run tests: `python -m unittest discover -s tests`
 5. Update documentation
 6. Submit pull request
 
