@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "customer_name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "order_date": "2024-01-15",
+    "product": "Laptop",
+    "quantity": 1,
+    "price": 1299.99,
+    "status": "pending"
+  },
+  {
+    "id": 2,
+    "customer_name": "Bob Smith",
+    "email": "bob.smith@example.com",
+    "order_date": "2024-01-16",
+    "product": "Wireless Mouse",
+    "quantity": 2,
+    "price": 29.99,
+    "status": "pending"
+  },
+  {
+    "id": 3,
+    "customer_name": "Carol White",
+    "email": "carol.white@example.com",
+    "order_date": "2024-01-17",
+    "product": "USB-C Cable",
+    "quantity": 5,
+    "price": 12.99,
+    "status": "pending"
+  },
+  {
+    "id": 4,
+    "customer_name": "David Brown",
+    "email": "david.brown@example.com",
+    "order_date": "2024-01-18",
+    "product": "External SSD",
+    "quantity": 1,
+    "price": 159.99,
+    "status": "pending"
+  },
+  {
+    "id": 5,
+    "customer_name": "Emma Davis",
+    "email": "emma.davis@example.com",
+    "order_date": "2024-01-19",
+    "product": "Mechanical Keyboard",
+    "quantity": 1,
+    "price": 89.99,
+    "status": "pending"
+  }
+]
