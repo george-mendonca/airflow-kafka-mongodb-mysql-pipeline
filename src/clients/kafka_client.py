@@ -1,46 +1,65 @@
-# Kafka Client
-
-## Produtor Kafka
-
-Este código implementa um produtor Kafka em Python. O produtor é responsável por enviar mensagens para um tópico Kafka.
-
-```python
-from kafka import KafkaProducer
+from kafka import KafkaProducer, KafkaConsumer
 import json
 
-class KafkaProducerClient:
-    def __init__(self, bootstrap_servers):
+class KafkaClientProducer:
+    """
+    Classe KafkaClientProducer para produção de mensagens no Kafka.
+
+    Métodos:
+        send_message(topic: str, message: dict) -> None:
+            Envia uma mensagem JSON para o tópico especificado no Kafka.
+    """
+
+    def __init__(self, bootstrap_servers: list):
+        """
+        Inicializa o produtor Kafka com os servidores bootstrap.
+
+        Args:
+            bootstrap_servers (list): Uma lista de endereços de servidores Kafka.
+        """
         self.producer = KafkaProducer(bootstrap_servers=bootstrap_servers,
                                        value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
-    def send_message(self, topic, message):
-        self.producer.send(topic, value=message)
+    def send_message(self, topic: str, message: dict) -> None:
+        """
+        Envia uma mensagem JSON para o tópico especificado no Kafka.
+
+        Args:
+            topic (str): O nome do tópico para onde a mensagem será enviada.
+            message (dict): O conteúdo da mensagem em formato de dicionário.
+        """
+        self.producer.send(topic, message)
         self.producer.flush()
 
-# Exemplo de uso do produtor
-producer = KafkaProducerClient('localhost:9092')
-producer.send_message('meu_topico', {'key': 'value'})
-```
 
-## Consumidor Kafka
+class KafkaClientConsumer:
+    """
+    Classe KafkaClientConsumer para consumo de mensagens do Kafka.
 
-Este código implementa um consumidor Kafka em Python. O consumidor é responsável por ler mensagens de um tópico Kafka.
+    Métodos:
+        consume_messages(topic: str) -> None:
+            Consome mensagens do tópico especificado no Kafka.
+    """
 
-```python
-from kafka import KafkaConsumer
-import json
+    def __init__(self, bootstrap_servers: list, group_id: str):
+        """
+        Inicializa o consumidor Kafka com os servidores bootstrap e o ID do grupo.
 
-class KafkaConsumerClient:
-    def __init__(self, bootstrap_servers, topic):
+        Args:
+            bootstrap_servers (list): Uma lista de endereços de servidores Kafka.
+            group_id (str): O ID do grupo de consumidores.
+        """
         self.consumer = KafkaConsumer(topic,
                                        bootstrap_servers=bootstrap_servers,
-                                       value_deserializer=lambda x: json.loads(x.decode('utf-8')))
+                                       group_id=group_id,
+                                       value_deserializer=lambda m: json.loads(m.decode('utf-8'))) 
 
-    def consume_messages(self):
+    def consume_messages(self, topic: str) -> None:
+        """
+        Consome mensagens do tópico especificado no Kafka.
+
+        Args:
+            topic (str): O nome do tópico do qual as mensagens serão consumidas.
+        """
         for message in self.consumer:
-            print(f'Recebido: {message.value}')
-
-# Exemplo de uso do consumidor
-consumer = KafkaConsumerClient('localhost:9092', 'meu_topico')
-consumer.consume_messages()
-```
+            print(f"Recebido: {message.value}")
