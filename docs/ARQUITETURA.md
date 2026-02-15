@@ -1,37 +1,46 @@
-# Arquitetura do Pipeline
+# Documentação da Arquitetura do Pipeline Airflow-Kafka-MongoDB-MySQL
 
-## Visão Geral
-Esta documentação tem como objetivo descrever a arquitetura do pipeline que integra o Airflow, Kafka, MongoDB e MySQL. O pipeline permite o processamento eficiente de dados em tempo real, garantindo uma robustez e escalabilidade necessárias para aplicações modernas.
+## Fluxo de Dados
 
-## Componentes do Pipeline
+```
++------------------+     +------------------+     +------------------+
+|   Airflow        | --> |      Kafka       | --> |   MongoDB        |
+|   Orquestração   |     |   Mensageria     |     |   Armazenamento   |
++------------------+     +------------------+     +------------------+
+          |                                           |
+          +-------------------------------------------+
+                            |
+                       +------------------+
+                       |      MySQL       |
+                       |  Processamento   |
+                       +------------------+
+```
 
-### 1. Apache Airflow
-Airflow é uma plataforma de orquestração de workflow que permite o agendamento e monitoramento de tarefas. Ele é usado para gerenciar as dependências entre as tarefas do pipeline, garantindo que os dados sejam processados na ordem correta.
+## Descrição dos Componentes
 
-### 2. Apache Kafka
-Kafka é um sistema de mensagens que serve como um intermediário de comunicação entre os diferentes componentes do sistema. Ele permite a publicação e assinatura de fluxos de dados em tempo real, oferecendo resistência e escalabilidade.
+- **Airflow**: Uma plataforma de orquestração de workflows que gerencia e agenda suas tarefas.
+- **Kafka**: Um sistema de mensagens que permite a transmissão de dados entre sistemas de forma assíncrona e em tempo real.
+- **MongoDB**: Um banco de dados NoSQL que armazena documentos em formato JSON, ideal para dados não estruturados.
+- **MySQL**: Um sistema de gerenciamento de banco de dados relacional que armazena dados estruturados.
 
-### 3. MongoDB
-MongoDB é um banco de dados NoSQL que armazena dados em formato JSON. Ele é utilizado para armazenar dados não estruturados e semi-estruturados, permitindo flexibilidade no esquema e consulta rápida.
+## Estruturas de Dados
 
-### 4. MySQL
-MySQL é um sistema de gerenciamento de banco de dados relacional que é utilizado para armazenar dados estruturados. Ele oferece transações ACID, sendo ideal para dados críticos onde a integridade é fundamental.
+### Estrutura do Kafka
+- Tópicos: Estruturas que armazenam mensagens.
+- Partições: Dividem dados dentro de tópicos para escalabilidade.
 
-## Fluxos de Dados
-- Os dados são coletados e enviados ao Kafka.
-- O Airflow é agendado para processar esses dados em intervalos regulares.
-- Os dados processados são inseridos no MongoDB para armazenamento e recuperação.
-- Dados críticos e estruturados são enviados para o MySQL para garantir a integridade e a consulta eficiente.
+### Estrutura do MongoDB
+- Documentos: Armazenados em coleções, representando registros.
+- Coleções: Um conjunto de documentos MongoDB.
 
 ## Considerações de Segurança
-- **Autenticação e Autorização:** Implementar autenticação em Kafka e restringir o acesso ao MongoDB e MySQL com senhas seguras.
-- **Criptografia:** Usar criptografia em trânsito (TLS) e em repouso (no armazenamento).
-- **Monitoramento:** Implementar monitoramento contínuo de acesso e atividades do sistema para detectar e responder a anomalias rapidamente.
+- Implementar autenticação e autorização no Kafka e MongoDB.
+- Usar TLS/SSL para criptografar dados em trânsito.
 
 ## Diretrizes de Escalabilidade
-- **Horizontal Scaling:** Utilizar múltiplas instâncias do Kafka e MongoDB para lidar com aumentos de carga.
-- **Partitioning:** Particionar dados no MongoDB e distribuir as cargas de trabalho no MySQL para melhor desempenho.
-- **Otimização de Queries:** Garantir que as queries sejam otimizadas e que os índices sejam usados corretamente para desempenho eficiente.
+- Escalar o Kafka horizontalmente adicionando mais brokers.
+- Utilizar sharding no MongoDB para distribuir dados em vários servidores.
+- Configurar réplicas no MySQL para garantir disponibilidade e balanceamento de carga.
 
----
-Essa arquitetura foi projetada para garantir eficiência e robustez em um cenário de alta demanda de dados, contribuindo para a eficácia e agilidade dos processos de negócio.
+## Conclusão
+Este documento fornece uma visão abrangente de como os dados fluem através da arquitetura do pipeline, assegurando que as práticas de segurança e escalabilidade sejam consideradas.
