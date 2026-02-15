@@ -79,6 +79,10 @@ class MySQLClient:
         Raises:
             mysql.connector.Error: Se houver erro na conexão
         """
+        # Fecha cursor anterior se existir
+        if self.cursor:
+            self.cursor.close()
+        
         self.connection = mysql.connector.connect(
             host=self.host,
             user=self.user,
