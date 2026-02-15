@@ -1,41 +1,79 @@
-# Airflow Kafka MongoDB MySQL Pipeline
+# Documentação do Projeto
 
-## Overview
-This project provides a robust data pipeline leveraging Apache Airflow for orchestration, Kafka for data streaming, and both MongoDB and MySQL as storage solutions. The primary objective is to streamline the process of moving data between these systems efficiently and reliably.
+Este documento abrange todos os aspectos relevantes sobre o projeto, incluindo requisitos, instalação rápida, uso, arquitetura, segurança, manutenção, diretrizes de contribuição e um índice abrangente para facilitar o acesso à documentação.
 
-## Description
-The pipeline is designed to automate the extraction, transformation, and loading (ETL) of data from various sources into MongoDB and MySQL databases. It utilizes Kafka as an intermediary to ensure data is processed in real-time, allowing for live data updates.
+## Índice
 
-## Technologies Used
-- **Apache Airflow**: For orchestrating the workflow.
-- **Apache Kafka**: For real-time data streaming.
-- **MongoDB**: NoSQL database for storing semi-structured data.
-- **MySQL**: Relational database for structured data storage.
-- **Python**: Primary programming language used for interaction with these technologies.
+1. [Requisitos](#requisitos)
+2. [Instalação Rápida](#instalação-rápida)
+3. [Uso](#uso)
+4. [Diagrama de Arquitetura](#diagrama-de-arquitetura)
+5. [Informações de Segurança](#informações-de-segurança)
+6. [Manutenção](#manutenção)
+7. [Diretrizes de Contribuição](#diretrizes-de-contribuição)
+8. [Índice de Documentação](#índice-de-documentação)
 
-## Installation
-1. Clone the repository:
+## Requisitos
+
+### Para desenvolvimento e execução:
+- Python 3.x
+- Apache Kafka
+- MongoDB
+- MySQL
+
+## Instalação Rápida
+
+Para instalar e configurar rapidamente, siga os passos abaixo:
+
+1. Clone o repositório:
    ```bash
    git clone https://github.com/george-mendonca/airflow-kafka-mongodb-mysql-pipeline.git
+   cd airflow-kafka-mongodb-mysql-pipeline
    ```
-2. Install the required packages:
+2. Instale as dependências:
    ```bash
    pip install -r requirements.txt
    ```
-3. Set up your environment variables for database connections and Kafka.
+3. Configure as variáveis de ambiente necessárias.
 
-## Usage
-- Start your Kafka server and ensure your topics are created.
-- Start MongoDB and MySQL services.
-- Run Airflow to initiate the pipeline:
-   ```bash
-   airflow scheduler
-   airflow webserver
-   ```
-- Trigger the DAG through the Airflow UI to start processing.
+## Uso
 
-## Contributing
-Contributions are welcome! Please fork the repo and submit a pull request for any updates or improvements.
+Para iniciar o projeto, utilize o seguinte comando:
+```bash
+python main.py
+```
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Diagrama de Arquitetura
+
+![Diagrama de Arquitetura](link_para_o_diagrama)
+
+## Informações de Segurança
+
+Para garantir a segurança, considere as seguintes práticas:
+- Mantenha suas credenciais seguras.
+- Utilize containers para isolar ambientes.
+
+## Manutenção
+
+Para manutenção do projeto, siga as diretrizes abaixo:
+- Atualize regularmente as dependências.
+- Teste novas funcionalidades em um ambiente de desenvolvimento antes de prosseguir para produção.
+
+## Diretrizes de Contribuição
+
+Se você gostaria de contribuir para este projeto, siga estas diretrizes:
+- Faça um fork do repositório.
+- Crie uma branch para sua feature ou bug fix.
+- Envie um pull request.
+
+## Índice de Documentação
+
+| Documento | Público-alvo |
+|-----------|--------------|
+| README.md | Desenvolvedores |
+| CONTRIBUTING.md | Contribuintes |
+| INSTALL.md | Usuários finais |
+
+## Observação
+
+O conteúdo detalhado para cada seção pode ser melhorado com a contribuição da comunidade.
