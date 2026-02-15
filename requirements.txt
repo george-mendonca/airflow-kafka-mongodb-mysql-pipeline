@@ -1,0 +1,6 @@
+apache-airflow
+kafka-python
+pymongo
+mysql-connector-python
+python-dotenv
+pandas
