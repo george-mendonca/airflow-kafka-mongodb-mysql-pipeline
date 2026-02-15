@@ -1,69 +1,37 @@
-# Architecture Documentation for Airflow-Kafka-MongoDB-MySQL ETL Pipeline
+# Arquitetura do Pipeline
 
-## Overview
-This document provides a comprehensive overview of the architecture for the ETL pipeline that integrates Apache Airflow, Apache Kafka, MongoDB, and MySQL. The architecture is designed to efficiently handle data ingestion, processing, and storage.
+## Visão Geral
+Esta documentação tem como objetivo descrever a arquitetura do pipeline que integra o Airflow, Kafka, MongoDB e MySQL. O pipeline permite o processamento eficiente de dados em tempo real, garantindo uma robustez e escalabilidade necessárias para aplicações modernas.
 
-## Architecture Diagram
-```
-  +--------------------+
-  |                    |
-  |  Apache Airflow    |
-  |                    |
-  +---------+----------+
-            |  
-            |  Trigger Tasks 
-            |  
-  +---------v----------+
-  |                    |
-  |   Apache Kafka     |
-  |                    |
-  +----+---------------+
-       |  
-       |  Produce Data 
-       |  
-  +----v---------------+
-  |                    |
-  |   Data Consumers    |
-  |                    |
-  +----+---------------+
-       |  
-       |  Insert/Update Data
-       |  
-  +----v---------------+
-  |                    |
-  |    MongoDB        |
-  |                    |
-  +----+---------------+
-       |  
-       |  Transform Data
-       |  
-  +----v---------------+
-  |                    |
-  |     MySQL         |
-  |                    |
-  +--------------------+
-```
+## Componentes do Pipeline
 
-## Component Descriptions
-- **Apache Airflow**: Orchestrates the ETL process, managing the sequence and timing of data ingestion tasks.
-- **Apache Kafka**: Acts as a message broker, facilitating real-time data streaming between producers and consumers.
-- **MongoDB**: NoSQL database used for storing unstructured data received through Kafka.
-- **MySQL**: Relational database used for structured data storage after transformation.
+### 1. Apache Airflow
+Airflow é uma plataforma de orquestração de workflow que permite o agendamento e monitoramento de tarefas. Ele é usado para gerenciar as dependências entre as tarefas do pipeline, garantindo que os dados sejam processados na ordem correta.
 
-## Data Structures
-- **Kafka messages**: JSON format containing raw data, schema defined as needed by the producers and consumers.
-- **MongoDB documents**: BSON format, allowing flexible schema designs.
-- **MySQL tables**: Defined schema for structured data, including tables like `users`, `transactions`, etc.
+### 2. Apache Kafka
+Kafka é um sistema de mensagens que serve como um intermediário de comunicação entre os diferentes componentes do sistema. Ele permite a publicação e assinatura de fluxos de dados em tempo real, oferecendo resistência e escalabilidade.
 
-## Security Considerations
-- Implement SSL/TLS for secure data transmission between components.
-- Use authentication and authorization mechanisms for Kafka and MongoDB to restrict access.
-- Regularly update components to address security vulnerabilities.
+### 3. MongoDB
+MongoDB é um banco de dados NoSQL que armazena dados em formato JSON. Ele é utilizado para armazenar dados não estruturados e semi-estruturados, permitindo flexibilidade no esquema e consulta rápida.
 
-## Scalability Guidelines
-- Scale Kafka horizontally by adding more brokers to handle increased load.
-- Utilize MongoDB's sharding capability to distribute data across multiple servers.
-- Optimize MySQL through partitioning and indexing to maintain performance as data grows.
+### 4. MySQL
+MySQL é um sistema de gerenciamento de banco de dados relacional que é utilizado para armazenar dados estruturados. Ele oferece transações ACID, sendo ideal para dados críticos onde a integridade é fundamental.
 
-## Conclusion
-This architecture provides a robust framework for building a scalable and secure ETL pipeline using Airflow, Kafka, MongoDB, and MySQL. The outlined components and guidelines form a solid base for further development and implementation of data workflows.
+## Fluxos de Dados
+- Os dados são coletados e enviados ao Kafka.
+- O Airflow é agendado para processar esses dados em intervalos regulares.
+- Os dados processados são inseridos no MongoDB para armazenamento e recuperação.
+- Dados críticos e estruturados são enviados para o MySQL para garantir a integridade e a consulta eficiente.
+
+## Considerações de Segurança
+- **Autenticação e Autorização:** Implementar autenticação em Kafka e restringir o acesso ao MongoDB e MySQL com senhas seguras.
+- **Criptografia:** Usar criptografia em trânsito (TLS) e em repouso (no armazenamento).
+- **Monitoramento:** Implementar monitoramento contínuo de acesso e atividades do sistema para detectar e responder a anomalias rapidamente.
+
+## Diretrizes de Escalabilidade
+- **Horizontal Scaling:** Utilizar múltiplas instâncias do Kafka e MongoDB para lidar com aumentos de carga.
+- **Partitioning:** Particionar dados no MongoDB e distribuir as cargas de trabalho no MySQL para melhor desempenho.
+- **Otimização de Queries:** Garantir que as queries sejam otimizadas e que os índices sejam usados corretamente para desempenho eficiente.
+
+---
+Essa arquitetura foi projetada para garantir eficiência e robustez em um cenário de alta demanda de dados, contribuindo para a eficácia e agilidade dos processos de negócio.
